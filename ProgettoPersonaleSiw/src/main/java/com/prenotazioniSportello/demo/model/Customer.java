@@ -16,9 +16,11 @@ public class Customer {
 	private int id_Customer;
 	private String name;
 	private String surname; 
-	private LocalDateTime birthDate;
+	private String email;
 	@OneToMany(mappedBy = "customer")
 	private List<Reservation> reservations; 
+	
+	public Customer () {}
 	
 	public int getId_Customer() {
 		return id_Customer;
@@ -29,9 +31,7 @@ public class Customer {
 	public String getSurname() {
 		return surname;
 	}
-	public LocalDateTime getBirthDate() {
-		return birthDate;
-	}
+
 	public void setId_Customer(int id_Customer) {
 		this.id_Customer = id_Customer;
 	}
@@ -41,7 +41,11 @@ public class Customer {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public void setBirthDate(LocalDateTime birthDate) {
-		this.birthDate = birthDate;
+	public String getPhoneNumber() {
+		return email;
 	}
+	public void setPhoneNumber(String email) {
+		this.email= email;
+	}
+
 }

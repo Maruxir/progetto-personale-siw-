@@ -1,7 +1,8 @@
 package com.prenotazioniSportello.demo.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,11 +16,15 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_Reservation;
-	private LocalDateTime date;
+	private	LocalDate date;
+	private LocalTime time;
+	
 	@ManyToOne
 	private Customer customer; 
 	@ManyToOne
 	private Category category;
+	
+	public Reservation() {};
 	
 	public int getId_Reservation() {
 		return id_Reservation;
@@ -39,11 +44,18 @@ public class Reservation {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	public LocalTime getTime() {
+		return time;
+	}
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
+	
 }

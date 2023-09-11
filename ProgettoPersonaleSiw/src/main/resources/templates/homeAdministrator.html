@@ -137,16 +137,46 @@ input[type=text], select {
   
 </style>
 
+
+<script>
+	function findByDate() {
+	var date = document.getElementById("date").value; 
+    sessionStorage.setItem('date', date);
+    console.log(date);
+    window.location.href = "/reservationByDate/" + date;}
+    
+   	function addReservation() {
+    window.location.href = "/addReservationCall"}
+</script>
+
 </head>
 <body>
   <header class="header">
     <h1>Comune di Gotham</h1>
   </header>
+    
+    <div class="form-group mb-3">
+        <label class="control-label">
+        <p><input type="date" id="date" name="date" min=""></p>
+        <a th:onclick="|findByDate()|" class="myButton">Cerca</a></p>
+    </div>
+    
+ <script>	
+		document.addEventListener("DOMContentLoaded", function() {
+        const date = new Date();
+        let currentDay = String(date.getDate()).padStart(2, '0');
+        let currentMonth = String(date.getMonth() + 1).padStart(2, "0");
+        let currentYear = date.getFullYear();
+        let currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+        document.getElementById("date").min = currentDate;
+    });
+ </script>
   
   <div class="container">
     	<tr th:each="Reservation: ${reservations}">
       <div class="product">
         <h2><td> <span th:text = "${Reservation.date}">Data</span> </td></h2>
+        <h2><td> <span th:text = "${Reservation.time}">Ora</span> </td></h2>
         <hr> 
         <p class="price"><td> <span th:text = "${Reservation.customer.name} + ${Reservation.customer.surname}">Default</span></td> </p>
 		<p class="price"><td> <span th:text = "${Reservation.category.name}">Default</span> </td></p>
@@ -154,7 +184,9 @@ input[type=text], select {
 			 
       </div>   
   </div>
-
+  
+  
+  <a th:onclick="|addReservation()|" class="myButton">Aggiungi</a></p>
   
 </body>
 </html>
