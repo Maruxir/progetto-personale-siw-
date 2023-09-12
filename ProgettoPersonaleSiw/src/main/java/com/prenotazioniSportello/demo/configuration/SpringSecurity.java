@@ -43,6 +43,7 @@ public class SpringSecurity{
                         		 .requestMatchers("/addReservationCall").permitAll()
                         		 .requestMatchers("/deleteReservation/{id}").permitAll()
                         		 .requestMatchers("/addReservation").permitAll()
+                        		 .requestMatchers("/pastReservation").permitAll()
                         		 .requestMatchers("/updateReservation").permitAll()
                         		 .requestMatchers("/updateReservationCall").permitAll()
                         		 .requestMatchers("/homeAdministrator").hasRole("ADMINISTRATOR")

@@ -35,10 +35,18 @@ public class AuthController {
 	public String homeAdministrator(Model model) {
 		ArrayList<Category> categories = categoryService.findAll();
 		model.addAttribute("categories", categories);
-		
-		ArrayList<Reservation> reservations = reservationService.findAll();
+		ArrayList<Reservation> todayreservations = reservationService.findToday();
+		model.addAttribute("todayreservations", todayreservations);
+		ArrayList<Reservation> reservations = reservationService.findNext();
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
+	}
+	
+	@RequestMapping("/pastReservation")
+	public String pastReservation(Model model) {
+		ArrayList<Reservation> pastReservations = reservationService.findPast();
+		model.addAttribute("reservations", pastReservations);
+		return "pastReservations";
 	}
 	
 	@GetMapping("/login")
@@ -76,23 +84,13 @@ public class AuthController {
 		return "homeAdministrator";
 	}
 	
-	/*@RequestMapping("/addReservation") 
-	public String addReservation(Model model, @RequestParam("name") String name, 
-			@RequestParam("surname") String surname, @RequestParam("email") String email) {
-		
-		Customer customer = customerService.findOrCreate(name, surname, email);
-		
-		ArrayList<Reservation> reservations = reservationService.findAll();
-		model.addAttribute("reservations", reservations);
-		return "homeAdministrator";
-	}*/
-	
 	@RequestMapping("/addReservationCall") 
 	public String addReservationCall(Model model) {
 		ArrayList<Category> categories = categoryService.findAll();
 		model.addAttribute("categories", categories);
 		return "addReservation";
 	}
+
 
 	@RequestMapping("/reservationByDate/{date}")
 	public String reservationByDate(Model model, @PathVariable String date ) {

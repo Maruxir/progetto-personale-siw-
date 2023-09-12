@@ -169,24 +169,8 @@ input[type=text], select {
 
 
 <script>
-	function findByDate() {
-	var date = document.getElementById("date").value; 
-    sessionStorage.setItem('date', date);
-    console.log(date);
-    window.location.href = "/reservationByDate/" + date;}
-    
-    function seePast() {
-    window.location.href = "/pastReservation"}
-    
-   	function addReservation() {
-    window.location.href = "/addReservationCall"}
-    
-    function deleteReservation(id_Reservation) {
-	window.location.href = "/deleteReservation/" + id_Reservation;}
-	
-	 function updateReservation(id_Reservation) {
-	sessionStorage.setItem("idReservation", id_Reservation)
-	window.location.href = "/updateReservationCall"}
+   	function back() {
+    window.location.href = "/homeAdministrator"}
 </script>
 
 </head>
@@ -195,33 +179,7 @@ input[type=text], select {
     <h1>Comune di Gotham</h1>
   </header>
     
-    <div class="form-group mb-3">
-        <label class="control-label">
-        <p><input type="date" id="date" name="date" min=""></p>
-        <a th:onclick="|findByDate()|" class="myButton">Cerca</a></p>
-    </div>
-    
-    
-   	<form action = "/reservationByCategory" method="post">
-			<p class="price"><td><select id="category" name="category">
-		   		<option th:each="Category : ${categories}"
-	                    th:text="${Category.name}">
-	            </option>
-	       	</select></td> </p>
-		    <input type="submit" value="Invia" class="add">
-		</form>
-		<a th:onclick="|seePast()|" class="myButton">vedi appuntamenti passati</a></p>
-    
- <script>	
-		document.addEventListener("DOMContentLoaded", function() {
-        const date = new Date();
-        let currentDay = String(date.getDate()).padStart(2, '0');
-        let currentMonth = String(date.getMonth() + 1).padStart(2, "0");
-        let currentYear = date.getFullYear();
-        let currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
-        document.getElementById("date").min = currentDate;
-    });
- </script>
+	<a th:onclick="|back()|" class="myButton">indietro</a></p>
  
  <table>
   <thead>
@@ -234,46 +192,16 @@ input[type=text], select {
     </tr>
   </thead>
   <tbody>
-	 <tr th:each="Reservation: ${todayreservations}">
-      <td th:text="${Reservation.date}">Default Date</td>
-      <td th:text="${Reservation.time}">Default Time</td>
-      <td th:text="${Reservation.customer.name}">Default Name</td>
-      <td th:text="${Reservation.customer.surname}">Default Surname</td>
-      <td th:text="${Reservation.category.name}">Default Category</td>
-      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="myButton">ELIMINA</a></td>
-      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">MODIFICA</a></td>
-    </tr>
-	 <tr class="separator-row">
-      <td colspan="5"></td>
-    </tr>
     <tr th:each="Reservation: ${reservations}">
       <td th:text="${Reservation.date}">Default Date</td>
       <td th:text="${Reservation.time}">Default Time</td>
       <td th:text="${Reservation.customer.name}">Default Name</td>
       <td th:text="${Reservation.customer.surname}">Default Surname</td>
       <td th:text="${Reservation.category.name}">Default Category</td>
-      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="myButton">ELIMINA</a></td>
-      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">MODIFICA</a></td>
     </tr>
   </tbody>
 </table>
-
   
-<!--  <div class="container">
-    	<tr th:each="Reservation: ${reservations}">
-      <div class="product">
-        <h2><td> <span th:text = "${Reservation.date}">Data</span> </td></h2>
-        <h2><td> <span th:text = "${Reservation.time}">Ora</span> </td></h2>
-        <hr> 
-        <p class="price"><td> <span th:text = "${Reservation.customer.name} + ${Reservation.customer.surname}">Default</span></td> </p>
-		<p class="price"><td> <span th:text = "${Reservation.category.name}">Default</span> </td></p>
-		<hr>
-			 
-      </div>   
-  </div> -->
-  
-  
-  <a th:onclick="|addReservation()|" class="myButton">Aggiungi</a></p>
   
 </body>
 </html>
