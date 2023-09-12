@@ -191,6 +191,16 @@ input[type=text], select {
         <a th:onclick="|findByDate()|" class="myButton">Cerca</a></p>
     </div>
     
+    
+   	<form action = "/reservationByCategory" method="post">
+			<p class="price"><td><select id="category" name="category">
+		   		<option th:each="Category : ${categories}"
+	                    th:text="${Category.name}">
+	            </option>
+	       	</select></td> </p>
+		    <input type="submit" value="Invia" class="add">
+		</form>
+    
  <script>	
 		document.addEventListener("DOMContentLoaded", function() {
         const date = new Date();

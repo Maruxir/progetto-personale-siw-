@@ -33,6 +33,9 @@ public class AuthController {
 
 	@RequestMapping("/homeAdministrator")
 	public String homeAdministrator(Model model) {
+		ArrayList<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
+		
 		ArrayList<Reservation> reservations = reservationService.findAll();
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
@@ -66,6 +69,8 @@ public class AuthController {
 		reservation.setTime(localTime);
 		reservationService.save(reservation); 
 		
+		ArrayList<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
 		ArrayList<Reservation> reservations = reservationService.findAll();
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
@@ -95,7 +100,21 @@ public class AuthController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.parse(dateString, formatter);
 
+		ArrayList<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
 		ArrayList<Reservation> reservations = reservationService.findByDate(localDate);
+		model.addAttribute("reservations", reservations);
+		return "homeAdministrator";
+	}
+	
+	
+	@RequestMapping("/reservationByCategory") 
+	public String reservationByCategory(Model model, @RequestParam("category") String categoryName) {
+		Category category = categoryService.findByname(categoryName);
+		
+		ArrayList<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
+		ArrayList<Reservation> reservations = reservationService.findByCategory(category);
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
 	}
@@ -104,6 +123,8 @@ public class AuthController {
 	public String deleteReservation(Model model, @PathVariable int id) {
 		reservationService.delete(id);
 
+		ArrayList<Category> categories = categoryService.findAll();
+		model.addAttribute("categories", categories);
 		ArrayList<Reservation> reservations = reservationService.findAll();
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
@@ -131,7 +152,8 @@ public class AuthController {
 		reservationService.save(reservation);
 	}
 	
-	
+	ArrayList<Category> categories = categoryService.findAll();
+	model.addAttribute("categories", categories);
 	ArrayList<Reservation> reservations = reservationService.findAll();
 	model.addAttribute("reservations", reservations);
 	return "homeAdministrator";

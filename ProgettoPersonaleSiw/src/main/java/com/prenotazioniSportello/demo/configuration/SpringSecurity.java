@@ -39,6 +39,7 @@ public class SpringSecurity{
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/reservationByDate/{date}").permitAll()
+                        		 .requestMatchers("/reservationByCategory").permitAll()
                         		 .requestMatchers("/addReservationCall").permitAll()
                         		 .requestMatchers("/deleteReservation/{id}").permitAll()
                         		 .requestMatchers("/addReservation").permitAll()

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prenotazioniSportello.demo.model.Category;
 import com.prenotazioniSportello.demo.model.Reservation;
 import com.prenotazioniSportello.demo.repository.ReservationRepository;
 
@@ -36,5 +37,9 @@ public class ReservationService {
 
 	public Reservation findById(int idReservation) {
 		return reservationRepository.findById(idReservation);
+	}
+
+	public ArrayList<Reservation> findByCategory(Category category) {
+		return reservationRepository.findByCategory(category);
 	}
 }
