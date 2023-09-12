@@ -48,9 +48,9 @@ public class AuthController {
 			@RequestParam("surname") String surname, @RequestParam("email") String email,
 			@RequestParam("date") String date, @RequestParam("time") String time,
 			@RequestParam("category") String categoryName) {
-		String dateString = date;
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate localDate = LocalDate.parse(dateString, formatter);
+		LocalDate localDate = LocalDate.parse(date, formatter);
 		
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 		LocalTime localTime = LocalTime.parse(time, timeFormatter);
@@ -82,17 +82,13 @@ public class AuthController {
 		return "homeAdministrator";
 	}*/
 	
-	
-	
 	@RequestMapping("/addReservationCall") 
 	public String addReservationCall(Model model) {
 		ArrayList<Category> categories = categoryService.findAll();
 		model.addAttribute("categories", categories);
 		return "addReservation";
 	}
-	
-	
-	
+
 	@RequestMapping("/reservationByDate/{date}")
 	public String reservationByDate(Model model, @PathVariable String date ) {
 		String dateString = date;
@@ -103,7 +99,41 @@ public class AuthController {
 		model.addAttribute("reservations", reservations);
 		return "homeAdministrator";
 	}
-	
-	
 
+	@RequestMapping("/deleteReservation/{id}")
+	public String deleteReservation(Model model, @PathVariable int id) {
+		reservationService.delete(id);
+
+		ArrayList<Reservation> reservations = reservationService.findAll();
+		model.addAttribute("reservations", reservations);
+		return "homeAdministrator";
+	} 
+	
+	@RequestMapping("/updateReservationCall")
+	public String updateReservationCall() {
+		return "updateReservation";
+	}
+	
+	@RequestMapping("/updateReservation")
+	public String updateReservation(Model model, @RequestParam("idReservation") int idReservation, 
+			@RequestParam("date") String date, @RequestParam("time") String time) {
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	LocalDate localDate = LocalDate.parse(date, formatter);
+		
+	DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+	LocalTime localTime = LocalTime.parse(time, timeFormatter);
+	
+	Reservation reservation = reservationService.findById(idReservation);
+	
+	if(reservation != null) {
+		reservation.setDate(localDate);
+		reservation.setTime(localTime);
+		reservationService.save(reservation);
+	}
+	
+	
+	ArrayList<Reservation> reservations = reservationService.findAll();
+	model.addAttribute("reservations", reservations);
+	return "homeAdministrator";
+	}
 }

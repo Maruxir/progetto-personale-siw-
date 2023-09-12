@@ -27,4 +27,14 @@ public class ReservationService {
 	public ArrayList<Reservation> findByDate(LocalDate date) {
 		return reservationRepository.findByDate(date);
 	}
+
+	public void delete(int id) {
+		Reservation reservation = reservationRepository.findById(id);
+		if(reservation != null) {
+		reservationRepository.delete(reservation); }
+	}
+
+	public Reservation findById(int idReservation) {
+		return reservationRepository.findById(idReservation);
+	}
 }

@@ -40,7 +40,10 @@ public class SpringSecurity{
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/reservationByDate/{date}").permitAll()
                         		 .requestMatchers("/addReservationCall").permitAll()
+                        		 .requestMatchers("/deleteReservation/{id}").permitAll()
                         		 .requestMatchers("/addReservation").permitAll()
+                        		 .requestMatchers("/updateReservation").permitAll()
+                        		 .requestMatchers("/updateReservationCall").permitAll()
                         		 .requestMatchers("/homeAdministrator").hasRole("ADMINISTRATOR")
                 ).formLogin(
                         form -> form

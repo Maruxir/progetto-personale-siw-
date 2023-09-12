@@ -134,6 +134,29 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
   
 </style>
 
@@ -147,6 +170,13 @@ input[type=text], select {
     
    	function addReservation() {
     window.location.href = "/addReservationCall"}
+    
+    function deleteReservation(id_Reservation) {
+	window.location.href = "/deleteReservation/" + id_Reservation;}
+	
+	 function updateReservation(id_Reservation) {
+	sessionStorage.setItem("idReservation", id_Reservation)
+	window.location.href = "/updateReservationCall"}
 </script>
 
 </head>
@@ -171,8 +201,31 @@ input[type=text], select {
         document.getElementById("date").min = currentDate;
     });
  </script>
+ 
+ <table>
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Ora</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="Reservation: ${reservations}">
+      <td th:text="${Reservation.date}">Default Date</td>
+      <td th:text="${Reservation.time}">Default Time</td>
+      <td th:text="${Reservation.customer.name}">Default Name</td>
+      <td th:text="${Reservation.customer.surname}">Default Surname</td>
+      <td th:text="${Reservation.category.name}">Default Category</td>
+      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="myButton">ELIMINA</a></td>
+      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">MODIFICA</a></td>
+    </tr>
+  </tbody>
+</table>
   
-  <div class="container">
+<!--  <div class="container">
     	<tr th:each="Reservation: ${reservations}">
       <div class="product">
         <h2><td> <span th:text = "${Reservation.date}">Data</span> </td></h2>
@@ -183,7 +236,7 @@ input[type=text], select {
 		<hr>
 			 
       </div>   
-  </div>
+  </div> -->
   
   
   <a th:onclick="|addReservation()|" class="myButton">Aggiungi</a></p>
