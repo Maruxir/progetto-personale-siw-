@@ -48,7 +48,7 @@ public class ReservationService {
 		ArrayList<Reservation> pastReservations = new ArrayList<Reservation>();
 		ArrayList<Reservation> allReservations = reservationRepository.findAll();
 		for(Reservation r : allReservations) {
-			if(r.getDate().isBefore(todaysDate) && r.getTime().isBefore(todaysTime)) {
+			if((r.getDate().isBefore(todaysDate) || r.getDate().isEqual(todaysDate))&& r.getTime().isBefore(todaysTime)) {
 				pastReservations.add(r);
 			}
 		}
