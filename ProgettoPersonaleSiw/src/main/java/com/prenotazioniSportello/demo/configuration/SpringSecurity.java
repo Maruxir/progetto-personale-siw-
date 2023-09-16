@@ -38,14 +38,14 @@ public class SpringSecurity{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/reservationByDate/{date}").permitAll()
-                        		 .requestMatchers("/reservationByCategory").permitAll()
-                        		 .requestMatchers("/addReservationCall").permitAll()
-                        		 .requestMatchers("/deleteReservation/{id}").permitAll()
-                        		 .requestMatchers("/addReservation").permitAll()
-                        		 .requestMatchers("/pastReservation").permitAll()
-                        		 .requestMatchers("/updateReservation").permitAll()
-                        		 .requestMatchers("/updateReservationCall").permitAll()
+                        authorize.requestMatchers("/reservationByDate/{date}").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/reservationByCategory").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/addReservationCall").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/deleteReservation/{id}").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/addReservation").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/pastReservation").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/updateReservation").hasRole("ADMINISTRATOR")
+                        		 .requestMatchers("/updateReservationCall").hasRole("ADMINISTRATOR")
                         		 .requestMatchers("/homeAdministrator").hasRole("ADMINISTRATOR")
                 ).formLogin(
                         form -> form
@@ -55,6 +55,7 @@ public class SpringSecurity{
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutSuccessUrl("/home")
                                 .permitAll()
                 );
         			

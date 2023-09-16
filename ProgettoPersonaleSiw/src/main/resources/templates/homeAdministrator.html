@@ -10,21 +10,43 @@
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
+      display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
-  .header {
-    background-color: #3498db;
-    color: #ffffff;
-    padding: 10px;
+   .header {
+    background-color: rgb(0, 128, 192);
+    color: rgb(255, 255, 255);
+    padding: 2px;
     text-align: center;
+    display:block;
+   font-family: 'Arial Narrow Bold';
+   font-size: 30px;
   }
+       .footer {
+    background-color: #3498db;
+    color: rgb(0, 0, 0);
+    padding: 2px;
+    text-align: end;
+   font-family: 'Arial Narrow Bold';
+   font-size: 12px;
+  }
+  
+  .footertext {
+	margin-right: 10px;
+	color:#ffffff ; 
+	font-size: 20;
+	font-weight: bold;
+}
 
   .container {
+	flex:1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    padding: 20px;
+    padding: 10px;
   }
   
    .text {
@@ -35,7 +57,7 @@
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0px 2px 4px rgba(109, 85, 85, 0.1);
-    width: 250px;
+    width: 40%;
     margin: 15px;
     padding: 15px;
     text-align: center;
@@ -53,11 +75,10 @@
     flex: 1; 
   }
 
-  .price {
+  .category {
 	font-weight: bold;
     font-size: 18px;
     color: #e74c3c;
-    margin-top: 10px;
   }
   
    .myButton {
@@ -69,11 +90,10 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:10px;
-	padding:6px 11px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
-  float: right;
-  margin-left: 10px;
+	height: 12px;
+	weight: 12px;
 }
 .myButton:hover {
 	background-color:#5cbf2a;
@@ -83,8 +103,9 @@
 	top:1px;
 }
 
+
 .remove {
-	background-color:#a8228b;
+	background-color:rgb(255, 0, 0);
 	border-radius:28px;
 	border:1px solid #ab1940;
 	display:inline-block;
@@ -92,10 +113,13 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:11px;
-	padding:10px 20px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #c92fa2;
+	height: 12px;
+	weight:12px;
 }
+
+
 .remove:hover {
 	background-color:#bf355a;
 }
@@ -112,10 +136,13 @@
 	cursor:pointer;
 	color:#333333;
 	font-family:Arial;
-	font-size:11px;
+	font-size:12px;
 	padding:10px 20px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffee66;
+	margin-top: 10px;
+	weight:40px ;
+	font-weight: bold;
 }
 .add:hover {
 	background-color:#ffab23;
@@ -126,13 +153,22 @@
 }
 
 input[type=text], select {
-  width: 100%;
+  width: 80%;
   padding: 12px 20px;
-  margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+input[type=date] {
+  width: 80%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-left:0px;
 }
 
   table {
@@ -164,11 +200,85 @@ input[type=text], select {
  .today-reservations {
     background-color: rgb(128, 255, 255); /* Cambia il colore come desideri */
   }
+  .home {
+	
+	border-radius:28px;
+	border:3px solid rgb(0, 0, 0);
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	padding:5px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #c92fa2;
+	height: 20px;
+	width:20px;
+	float : left;
+	margin-top: 60px;
+}
+	.logout {
+	background-color:rgb(255, 0, 0);
+	border-radius:28px;
+	border:3px solid rgb(0, 0, 0);
+	float:right;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-weight: bold;
+	font-size:12px;
+	padding:5px 5px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	margin-top: 60px;
+	
+}
+
+   .past {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:center;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	padding:6px 11px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+  margin-left: 10px;
+}
+  .search {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display: inline-block;
+	cursor: pointer;
+	color:rgb(0, 0, 0);
+	font-family:Arial;
+	font-size:20px;
+	padding:6px 11px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+  margin-left: 10px;
+  width:30px;
+  height:20px;
+}
+
+
   
 </style>
 
 
 <script>
+	function logout() {
+		 window.location.href = "/logout";
+	}
+	function home() {
+		 window.location.href = "/homeAdministrator";
+	}
 	function findByDate() {
 	var date = document.getElementById("date").value; 
     sessionStorage.setItem('date', date);
@@ -192,25 +302,36 @@ input[type=text], select {
 </head>
 <body>
   <header class="header">
-    <h1>Comune di Gotham</h1>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/CoA_Comune_di_Albenga.png/740px-CoA_Comune_di_Albenga.png" width="80" alt="logout" />
+    <h1>Comune di Albenga
+      <a th:onclick="|home()|" class="home"><img src="https://www.freeiconspng.com/uploads/home-page-icon-0.png" width="20" alt="home" /></a></a>
+  <a th:onclick="|logout()|" class="logout">
+  <img src="https://www.freeiconspng.com/uploads/exit-icon-3.png" width="20" alt="logout" /></a> </h1>
   </header>
-    
-    <div class="form-group mb-3">
+  
+    <div class="container">
+    <div class="product">
         <label class="control-label">
-        <p><input type="date" id="date" name="date" min=""></p>
-        <a th:onclick="|findByDate()|" class="myButton">Cerca</a></p>
-    </div>
-    
-    
+        <p class="line"><input type="date" id="date" name="date" min="">
+        <a th:onclick="|findByDate()|" class="add">Cerca
+        </a></p>
+    	</label>
+    <br>
    	<form action = "/reservationByCategory" method="post">
 			<p class="price"><td><select id="category" name="category">
 		   		<option th:each="Category : ${categories}"
 	                    th:text="${Category.name}">
 	            </option>
-	       	</select></td> </p>
-		    <input type="submit" value="Invia" class="add">
+	       	</select></td> 
+	       	<input type="submit" value="Cerca" class="add"></p>
 		</form>
-		<a th:onclick="|seePast()|" class="myButton">vedi appuntamenti passati</a></p>
+		<br>
+		<a th:onclick="|seePast()|" class="past">Vedi appuntamenti passati</a></p>
+		 </div>
+		 </div>
+		 
+		 
+		 
     
  <script>	
 		document.addEventListener("DOMContentLoaded", function() {
@@ -240,8 +361,13 @@ input[type=text], select {
       <td th:text="${Reservation.customer.name}">Default Name</td>
       <td th:text="${Reservation.customer.surname}">Default Surname</td>
       <td th:text="${Reservation.category.name}">Default Category</td>
-      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="myButton">ELIMINA</a></td>
-      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">MODIFICA</a></td>
+      
+      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">
+      <img src="https://www.freeiconspng.com/uploads/edit-editor-pen-pencil-write-icon--4.png" alt="Modifica" width="12" height="12">
+      </a></td>
+      
+      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="remove">
+      <img src="https://www.freeiconspng.com/uploads/remove-icon-png-31.png" width="10" height="10" alt="Elimina" /></a></td>
     </tr>
 	 <tr class="separator-row">
       <td colspan="5"></td>
@@ -252,28 +378,29 @@ input[type=text], select {
       <td th:text="${Reservation.customer.name}">Default Name</td>
       <td th:text="${Reservation.customer.surname}">Default Surname</td>
       <td th:text="${Reservation.category.name}">Default Category</td>
-      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="myButton">ELIMINA</a></td>
-      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">MODIFICA</a></td>
+      
+      <td <a th:onclick="|updateReservation(${Reservation.id_Reservation})|" class="myButton">
+      <img src="https://www.freeiconspng.com/uploads/edit-editor-pen-pencil-write-icon--4.png" alt="Modifica" width="12" height="12">
+      </a></td>
+      
+      <td <a th:onclick="|deleteReservation(${Reservation.id_Reservation})|" class="remove">
+      <img src="https://www.freeiconspng.com/uploads/remove-icon-png-31.png" width="10" height="10" alt="Elimina" /></a></td>
+    
     </tr>
   </tbody>
 </table>
-
   
-<!--  <div class="container">
-    	<tr th:each="Reservation: ${reservations}">
-      <div class="product">
-        <h2><td> <span th:text = "${Reservation.date}">Data</span> </td></h2>
-        <h2><td> <span th:text = "${Reservation.time}">Ora</span> </td></h2>
-        <hr> 
-        <p class="price"><td> <span th:text = "${Reservation.customer.name} + ${Reservation.customer.surname}">Default</span></td> </p>
-		<p class="price"><td> <span th:text = "${Reservation.category.name}">Default</span> </td></p>
-		<hr>
-			 
-      </div>   
-  </div> -->
-  
-  
-  <a th:onclick="|addReservation()|" class="myButton">Aggiungi</a></p>
+<p> <a th:onclick="|addReservation()|" class="add">
+<img src="https://www.freeiconspng.com/uploads/add-icon--mono-general-icons--softiconsm-24.png" width="15" alt="Aggiungi"></a>
+</a></p>
+ 
+ <hr>
+ 
+ <footer class= "footer">
+  	<p class="footertext">Autore: Irene Marucci <br>
+ 	Matricola: 546388 <br>
+ 	<a class= "footertext" href="https://github.com/Maruxir/catalogo_prodotti">github</a></p>
+ </footer>
   
 </body>
 </html>
